@@ -10,7 +10,7 @@ class Net(torch.nn):
         super(Net, self).__init__()
         self.hidden = hidden
         self.fc1 = nn.Linear(hidden,hidden)
-        self.fc1 = nn.Linear(hidden,10)
+        self.fc2 = nn.Linear(hidden,10)
 
     def forward(self,x):
         x = F.relu(self.fc1(x))
