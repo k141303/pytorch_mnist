@@ -24,6 +24,6 @@ print("TRAIN Length:",len(train_set))
 print("TEST  Length:",len(test_set))
 print("Data Shape:",train_set[0][0].size())
 
-#バッチとかシャッフルとか色々
+#バッチとかシャッフルとか色々設定してイテレータを作ってくれる
 train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=512, shuffle=True)
 train_dataloader = torch.utils.data.DataLoader(test_set, batch_size=512, shuffle=True)
