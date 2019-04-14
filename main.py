@@ -2,6 +2,8 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 import numpy as np
+from trainer import MNISTTrainer
+from model import Net
 
 #画像を前処理してくれるモジュール
 transform = transforms.Compose(
@@ -26,4 +28,15 @@ print("Data Shape:",train_set[0][0].size())
 
 #バッチとかシャッフルとか色々設定してイテレータを作ってくれる
 train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=512, shuffle=True)
-train_dataloader = torch.utils.data.DataLoader(test_set, batch_size=512, shuffle=True)
+test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=512, shuffle=False)
+
+#モデル作成
+net = Net(hidden =  256)
+
+#trainerの作成
+mnist = MNISTTrainer(train_dataloader,test_dataloader)
+
+epochs = 10
+for epoch in range(epochs):
+    mnist.train()
+    mnist.test()
