@@ -1,7 +1,7 @@
 """
 深層学習モデルの定義
 """
-
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
@@ -13,6 +13,7 @@ class Net(torch.nn):
         self.fc2 = nn.Linear(hidden,10)
 
     def forward(self,x):
+        x = torch.flatten(x)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x
