@@ -5,9 +5,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-class Net(nn.Module):
+class FNN(nn.Module):
+    """
+    フィードフォワードネットワーク(F(F)NN)
+    """
     def __init__(self,hidden = 784):
-        super(Net, self).__init__()
+        super(FNN, self).__init__()
         self.hidden = hidden    #隠れ層のサイズ
         self.fc1 = nn.Linear(28*28,hidden)  #入力層
         self.fc2 = nn.Linear(hidden,10) #出力層

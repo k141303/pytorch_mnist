@@ -3,7 +3,7 @@ import torchvision
 import torchvision.transforms as transforms
 import numpy as np
 from trainer import MNISTTrainer
-from model import Net
+from model import *
 
 #画像を前処理してくれるモジュール
 transform = transforms.Compose(
@@ -31,7 +31,7 @@ train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=512, shuffl
 test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=512, shuffle=False)
 
 #モデル作成
-net = Net(hidden =  784)
+net = FNN(hidden =  784)
 
 #trainerの作成
 mnist = MNISTTrainer(net,train_dataloader,test_dataloader)

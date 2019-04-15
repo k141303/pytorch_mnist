@@ -1,19 +1,18 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from model import Net
 from tqdm import tqdm
 
 class MNISTTrainer:
-    def __init__(self, net : Net, train_data : DataLoader, test_data : DataLoader, lr: float = 0.01, use_gpu = False):
+    def __init__(self, model : nn.Module, train_data : DataLoader, test_data : DataLoader, lr: float = 0.01, use_gpu = False):
         self.train_data = train_data
         self.test_data = test_data
-        self.net = net
+        self.model = model
         self.criterion = nn.CrossEntropyLoss()   #誤差関数
-        self.optim = torch.optim.SGD(net.parameters(), lr=lr)   #最適化手法にSGDを適用
+        self.optim = torch.optim.SGD(self.model.parameters(), lr=lr)   #最適化手法にSGDを適用
         self.device = torch.device("cuda:0" if use_gpu else "cpu")  #デバイス選択
 
-        self.net.to(self.device)    #デバイスに送る
+        self.model.to(self.device)    #デバイスに送る
 
         if torch.cuda.device_count() > 1 and use_gpu:   #複数gpuを使用できる場合の処理
             print("Using %d GPUS for BERT" % torch.cuda.device_count())
@@ -30,7 +29,7 @@ class MNISTTrainer:
         sum_loss,sum_correct,sum_element = 0,0,0
 
         for i,(img,label) in data_iter:
-            t = self.net(img)   #forward計算
+            t = self.model(img)   #forward計算
             loss = self.criterion(t, label)    #誤差を計算
 
             if train:   #学習時
