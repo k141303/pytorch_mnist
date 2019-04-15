@@ -36,7 +36,8 @@ net = Net(hidden =  256)
 #trainerの作成
 mnist = MNISTTrainer(net,train_dataloader,test_dataloader)
 
+#学習の開始
 epochs = 10
 for epoch in range(epochs):
-    mnist.train(epoch)
-    mnist.test(epoch)
+    mnist.train(epoch)  #学習
+    mnist.test(epoch)   #テスト
