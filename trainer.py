@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 from torch.utils.data import DataLoader
 from model import Net
 from tqdm import tqdm
@@ -18,14 +19,14 @@ class MNISTTrainer:
             print("Using %d GPUS for BERT" % torch.cuda.device_count())
             self.model = nn.DataParallel(self.model)
 
-    def train(self):   #学習
-        return iteration(self.train_data,train = True)
+    def train(self,epoch):   #学習
+        return self.iteration(epoch,self.train_data,train = True)
 
-    def test(self):    #テスト
-        return iteration(self.test_data,train = False)
+    def test(self,epoch):    #テスト
+        return self.iteration(epoch,self.test_data,train = False)
 
-    def iteration(self,data,train = False):
-        data_iter = tqdm.tqdm(enumerate(data), desc="EP:%d" % (epoch), total=len(data_iter), bar_format="{l_bar}{r_bar}")
+    def iteration(self,epoch,data,train = False):
+        data_iter = tqdm(enumerate(data), desc="EP:%d" % (epoch), total=len(data), bar_format="{l_bar}{r_bar}")
         sum_loss,sum_correct,sum_element = 0,0,0
 
         for i,(img,label) in data_iter:

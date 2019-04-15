@@ -34,9 +34,9 @@ test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=512, shuffle=
 net = Net(hidden =  256)
 
 #trainerの作成
-mnist = MNISTTrainer(train_dataloader,test_dataloader)
+mnist = MNISTTrainer(net,train_dataloader,test_dataloader)
 
 epochs = 10
 for epoch in range(epochs):
-    mnist.train()
-    mnist.test()
+    mnist.train(epoch)
+    mnist.test(epoch)
