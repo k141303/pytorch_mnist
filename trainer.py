@@ -40,7 +40,7 @@ class MNISTTrainer:
 
             sum_loss += loss.item() #lossの合計
             sum_correct += t.argmax(dim=-1).eq(label).sum().item()  #正答率計算
-            sum_element += label.nelement() #総画像数の合計
+            sum_element += label.nelement() #イテレーション内の総データ数を取得
 
-        print("loss:",sum_loss/len(data))
+        print("loss:",sum_loss/len(data))   #誤差をイテレーション数で平均
         print("correct",sum_correct/sum_element*100.0)
