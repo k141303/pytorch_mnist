@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Net(nn.Module):
-    def __init__(self,hidden = 256):
+    def __init__(self,hidden = 784):
         super(Net, self).__init__()
         self.hidden = hidden    #隠れ層のサイズ
         self.fc1 = nn.Linear(28*28,hidden)  #入力層
