@@ -39,7 +39,7 @@ class MNISTTrainer:
                 self.optim.step()   #モデルパラメータの更新
 
             sum_loss += loss.item() #lossの合計
-            sum_correct += t.argmax(dim=-1).eq(label).sum()  #正答率計算
+            sum_correct += t.argmax(dim=-1).eq(label).sum().item()  #正答率計算
             sum_element += label.nelement() #総画像数の合計
 
         print("loss:",sum_loss/len(data))
