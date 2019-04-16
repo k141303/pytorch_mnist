@@ -31,7 +31,7 @@ train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=512, shuffl
 test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=512, shuffle=False)
 
 #モデル作成
-net = FNN(hidden =  784)
+net = CNN()
 
 #trainerの作成
 mnist = MNISTTrainer(net,train_dataloader,test_dataloader)
